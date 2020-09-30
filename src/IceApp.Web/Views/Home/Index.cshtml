@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+}
+
+
+@section Styles
+    {
+    <script src="~/js/parallax.js-1.5.0/parallax.js"></script>
+    <link href="~/css/home.css" rel=" stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
+
+}
+
+
+<div class="row m-0 p-0">
+    <div class="col-12 p-0">
+        <div class="parallax-window parallax-video">
+            <div class="parallax-slider">
+                <h1 style="position:absolute; top:38%; font-size:5em; justify-content:center;left:29%; color:white; text-align:center">
+                    Добро пожаловать<br />
+                    Найди своё мороженное
+                </h1>
+
+                <video loop muted autoplay style="height:100%; width:100%; ">
+                    <source src="~/images/main/first-video.mp4" type="video/mp4">
+
+                </video>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 p-0">
+        <article class="change">
+            <div class="parallax-window" data-parallax="scroll" data-image-src="\images\main\ICE_CREAM_05_30_1915602.jpg">
+                <div class="container  text-white text-center align-self-center" style="padding-top:30vh">
+                    <h1>
+                        Добро пожаловать<br />
+                        Найди своё мороженное
+                    </h1>
+                </div>
+
+            </div>
+        </article>
+    </div>
+
+</div>
+
+<div class="row mx-0 px-0   " style="padding-top:15vh; padding-bottom:15vh;">
+    <div class="col-12 col-md-3  offset-md-1 text-center text-md-left">
+        <h1>
+            Всегда есть<br /> повод для<br /> нашего мороженного
+        </h1>
+    </div>
+    <div class="col-12 col-md-5 offset-md-2 text-center text-md-left">
+        <p>
+            Одни из крупнейших производителей мороженого на территории Центрального черноземного федерального округа. Мы производим качественный продукт на протяжении 19 лет и доставляем его в разные части округа.<br />
+
+            С первых дней существования стремимся вложить в свой продукт только самое лучшее – натуральное молоко, нежные сливки, сахар, орехи и другие натуральные ингредиенты от  производителей, а главное, вложить в продукт свою любовь к каждому потребителю.<br />
+            Наш ассортимент включает в себя всем известные и любимые с детства: эскимо на палочке, сахарные рожки, ванильные стаканчики, но также, стараемся разнообразить выбор новыми оригинальными разработками.<br />
+            Каждый год мы открываем новую линию производства, что позволяет радовать потребителей вкусными новинками!<br /> Высокие технологии и наличие собственной артезианской скважины позволяет выпускать экологически чистую продукцию по традиционным классическим рецептам.
+            Каждый сезон предприятие представляет новую линейку мороженого, в настоящий момент мы реализуем более 30 брендов вкуснейшего мороженого, всего в ассортименте насчитывается более 200 товарных позиций.<br /> Наша продукция не оставит Вас равнодушными и подарит ощущение радости!
+        </p>
+    </div>
+</div>
+
+<div class="row m-0 p-0 ">
+    <div class="col-12  p-0 ">
+        <div class="parallax-window" data-parallax="scroll" data-image-src="\images\main\DSC06259-sqed.jpg">
+
+            <div class="col-12 col-md-6  offset-md-6 text-white  text-center text-md-right pr-md-5" style="padding-top:30vh">
+                <h1 style="margin-bottom:40px;">
+                    Cельская жизнь
+                </h1>
+                <p>
+                    Все началось на ферме. Ферма Arethusa Farm резко выросла с 5 до более чем 300 коров в направлениях, которые мы даже не могли себе представить.<br />
+                    Гордо расположенный на холмах Личфилда, Коннектикут.
+                </p>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+<div class="row mx-0 px-0  " style="padding-top:18vh; padding-bottom:18vh;">
+    <div class="col-12 col-md-4  offset-md-1 text-center text-md-left mb-5">
+        <h1>
+
+            Полная молочная кабина
+        </h1>
+        <p>
+            На нашем молочном заводе мы производим и упаковываем каждый молочный продукт Arethusa Farm. Наш молочный завод использует особые технологии обработки, от молока до мороженого и масла, чтобы гарантировать высочайшее качество наших продуктов.
+        </p>
+    </div>
+    <div class="col-12 col-md-5 offset-md-1 ">
+        <img src="~/images/main/66962.jpg" class="img-fluid" />
+    </div>
+</div>
+
+<div class="row m-0 p-0 ">
+    <div class="col-12  p-0 ">
+        <div class="parallax-window" data-parallax="scroll" data-image-src="\images\main\34dd15f5f07fb2223387c0f874d54c58.jpg">
+
+            <div class="col-12  text-white  text-center pr-md-5" style="padding-top:30vh">
+                <h1 style="margin-bottom:40px;">
+                    Ждем ваш визит
+                </h1>
+                <p>
+                    Приглашаем всех любителей мороженого от 6 лет и старше на экскурсию по фабрике мороженого!
+                </p>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+<script>
+        $('.parallax-window').parallax({
+            naturalHeight: 1200
+        });
+</script>

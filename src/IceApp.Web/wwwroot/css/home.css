@@ -1,0 +1,29 @@
+﻿.parallax-window {
+	height:100vh;
+	background: transparent;
+	
+}
+h1 {
+	font-family: 'Lobster';
+	font-size: 60px;
+	line-height: 57px;
+}
+
+main p {
+	font-family: 'Marck Script', cursive;
+	font-size: 22px;
+	line-height: 25px;
+}
+
+@media screen and (max-width: 1128px) {
+	.row .parallax-video {
+		visibility: hidden;
+		display: none;
+	}
+}
+@media screen and (min-width: 1128px) {
+	.row .change{
+		visibility: hidden;
+		display: none;
+	}
+}

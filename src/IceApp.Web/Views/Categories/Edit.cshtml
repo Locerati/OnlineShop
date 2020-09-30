@@ -1,0 +1,33 @@
+﻿@model CategoryViewModel;
+@{
+    ViewBag.Title = "Редактирование категории";
+}
+@section Styles{
+
+    <link href="~/css/validation-styles.css" rel="stylesheet">
+}
+<div class="row m-0 p-0 py-3">
+
+    <form class="col-md-4 offset-md-1" asp-action="Edit" asp-controller="Categories" asp-antiforgery="true" asp-route-id="@Model.Id" asp-route-Image="@Model.Image" enctype="multipart/form-data">
+        <h2>Изменение категории</h2>
+        <div class="form-group">
+            <label for="Name">Введите название категории</label>
+            <input type="text" asp-for="Name" id="Name" class="form-control" autocomplete="off">
+            <span asp-validation-for="Name" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group">
+            <label class="form-check-label" for="ImagePth">Добавьте изображение</label>
+            <input type="file" id="ImagePth" name="uploadedFile" class="form-control-file"  accept="image/jpeg,image/png,image/jpg">
+        </div>
+        @Html.ActionLink("Вернуться к категориям", "List")|
+        <button type="submit" class="btn btn-primary">Изменить</button>
+    </form>
+</div>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/Validations/ValidationFilesImage.js"></script>
+}

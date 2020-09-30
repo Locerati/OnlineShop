@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CategoryViewModel>;
+@{
+}
+@section Styles
+    {
+    <!-- Bootstrap CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+     
+ <link rel="stylesheet" type="text/css" href="~/css/CategoriesStyles.css" />
+ 
+    
+    
+    
+}
+<div class="foo mb-5">
+    <span class="letter" data-letter="К">К</span>
+    <span class="letter" data-letter="А">А</span>
+    <span class="letter" data-letter="Т">Т</span>
+    <span class="letter" data-letter="Е">Е</span>
+    <span class="letter" data-letter="Г">Г</span>
+    <span class="letter" data-letter="О">О</span>
+    <span class="letter" data-letter="Р">Р</span>
+    <span class="letter" data-letter="И">И</span>
+    <span class="letter" data-letter="И">И</span>   
+</div>
+
+<div class="row  row-cols-1 row-cols-md-2  row-cols-lg-4 m-0 p-0 ">
+
+    @foreach (var cat in Model)
+    {
+        <div class="col mb-4 mt-4 mt-md-0  ">
+            <a asp-action="" asp-controller="" asp-route-id=@cat.Id>
+                <figure class="figure">
+                    <div class="img_wrap">
+                        <img src=@cat.Image class="figure-img img-fluid rounded w-100" alt="Сопроводительная надпись для изображения.">
+                    </div>
+                    <figcaption class="figure-caption text-center mt-2">@cat.Name</figcaption>
+                </figure>
+            </a>
+
+        </div>
+
+    }
+
+</div>

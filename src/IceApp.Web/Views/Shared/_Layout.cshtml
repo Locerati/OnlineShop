@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - IceApp</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @RenderSection("Styles", false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md  navbar-toggleable-md navbar-light bg-white border-bottom box-shadow mb-3 fixed-top">
+            <div class="container col-12">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/badges/title-ice-bage.svg" /></a>
+
+                <button class="navbar-toggler " type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon "></span>
+                </button>
+                <div class="navbar-collapse collapse text-center">
+                    <ul class="navbar-nav mr-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Магазин</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Contacts" asp-action="Maps">Контакты</a>
+                        </li>
+                    </ul>
+                    <div class="navbar-nav ml-auto nav-flex-icons">
+
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <img src="~/images/badges/acountprofile.svg" style="width:30px;height:30px;" />
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-default"
+                                 aria-labelledby="navbarDropdownMenuLink-333">
+                                <a class="dropdown-item" href="#">Профиль</a>
+                                <a class="dropdown-item" href="#">Корзина</a>
+                                <a class="dropdown-item" href="#">Заказы</a>
+                                <a class="dropdown-item" href="#">Вход</a>
+                                <a class="dropdown-item" href="#">Выход</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </nav>
+    </header>
+    <div class="wrapper">
+
+        <main role="main" class=" m-0 p-0">
+            <div class="container-fluid p-0 " style="margin-top:60px;">
+                @RenderBody()
+            </div>
+        </main>
+
+
+        <footer class=" footer  col-12 p-0 m-0 text-light " style="background-color:#1c2331">
+            <div class="container  col-12 text-center text-md-left pt-3">
+                <!-- Grid row -->
+                <div class="row mt-3">
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+                        <!-- Content -->
+                        <h6 class="text-uppercase font-weight-bold">Ice Cream Company</h6>
+                        <hr class="bg-white mb-3 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p>
+                            Один из крупнейших поставщиков мороженного в России
+                        </p>
+
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                        <!-- Links -->
+                        <h6 class="text-uppercase font-weight-bold">Меню</h6>
+                        <hr class="bg-white mb-3 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p>
+                            <a asp-area="" asp-controller="Home" asp-action="Index" style="color:white">Главная</a>
+                        </p>
+                        <p>
+                            <a asp-controller="Categories" asp-action="Index" style="color:white">Магазин</a>
+                        </p>
+                        <p>
+                            <a asp-controller="Contacts" asp-action="Maps" style="color:white">Контакты</a>
+                        </p>
+
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                        <!-- Links -->
+                        <h6 class="text-uppercase font-weight-bold">МЫ В СОЦИАЛЬНЫХ СЕТЯХ</h6>
+                        <hr class="bg-white mb-3 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p>
+                            <a class="fb-ic" href="#" style="color:white">
+                                <i class="fab fa-facebook-f white-text mr-1"> </i> Facebook
+                            </a>
+                        </p>
+
+                        <p>
+                            <a class="tw-ic" href="#" style="color:white">
+                                <i class="fab fa-twitter white-text mr-1"> </i> Twitter
+                            </a>
+                        </p>
+                        <p>
+                            <!--Instagram-->
+                            <a class="ins-ic" href="#" style="color:white">
+                                <i class="fab fa-instagram white-text mr-1"> </i> Instagram
+                            </a>
+                        </p>
+
+
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+                        <!-- Links -->
+                        <h6 class="text-uppercase font-weight-bold">Контакты</h6>
+                        <hr class="bg-white mb-3 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p>
+
+                            <i class="fas fa-home mr-3"></i> 394018, г.Воронеж, ул.Плехановская, 10
+                        </p>
+                        <p>
+                            <i class="fas fa-envelope mr-3"></i> info@example.com
+                        </p>
+                        <p>
+                            <i class="fas fa-phone mr-3"></i> + 01 234 567 88
+                        </p>
+                        <p>
+                            <i class="fas fa-print mr-3"></i> + 01 234 567 89
+                        </p>
+
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+
+            </div>
+            <div class="container-fluid  p-2 col-12 text-center  text-center py-0" style="background-color:black">
+                © 2020 Copyright:
+                <span>Denis Popov</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

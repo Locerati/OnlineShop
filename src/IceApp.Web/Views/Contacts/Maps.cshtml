@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "Maps";
+}
+@section Styles{
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU" type="text/javascript"></script>
+
+}
+
+
+    <div class="row  mx-5 " style="margin-top:6%">
+        <div class="col-12 col-md-7 border border-dark">
+            <h2>
+                Контакты
+            </h2>
+            <p>
+                <img src="~/images/contacts/auto delovi autology lokacija.png" style="width:40px;" />
+                <strong>Адреса точек самовывоза и расписание их работы:</strong><hr />
+                <em>
+                    г. Воронеж, Ленинский проспект, 174/17. Самовывоз доступен с 10:00 до 22:00.<br />
+                    г. Воронеж, ул. Шишкова, дом № 107Б, корп. 6. Самовывоз доступен с 14:00 до 02:00.
+                </em><br />
+                <br />
+            </p>
+
+            <p>
+                <img src="~/images/contacts/81240-point-text-escobar-icons-telephone-computer-call.png" style="width:40px;" />
+                <strong>Телефон</strong><hr />
+                <em> 89204617908</em>  <br />
+                <br />
+            </p>
+            <p>
+                <img src="~/images/contacts/img_338476.webp" style="width:35px;" />
+                <strong>Информация о доставке</strong><hr />
+                <em>
+                    Любой Ваш заказ мы доставим БЕСПЛАТНО! Вы оплачиваете только  стоимость любимых блюд. Минимальная сумма заказа: 500 рублей на доставку, при самовывозе сумма заказа может быть любой.
+
+                    Ваш заказ будет доставлен максимально быстро - от 30 минут. Точное время доставки сообщит оператор при оформлении заказа.
+
+                    В течение этого времени просим Вас оставаться на связи и быть готовым принять заказ. Иногда мы привозим заказы даже раньше обозначенного времени:)
+                    Если Вы не забрали заказ вовремя и не ответили на звонок курьера, повторная доставка оплачивается отдельно.
+                </em>
+            </p>
+        </div>
+        <div class="col-12 mb-5 ">
+            <h2>Область доставки и адресса магазинов</h2>
+            <div id="map" style="width: 100%; height: 400px; margin-top:20px; "></div>
+        </div>
+
+
+    </div>
+
+
+<script src="~/js/Contacts/Maps.js"></script>
+
+
