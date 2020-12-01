@@ -16,6 +16,17 @@ namespace IceApp.Infra.IoC
         {
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+            services.AddScoped<ISubcategoryService, SubcategoryService>();           
+            services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
+
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+
+            services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
+
+
         }
     }
 }

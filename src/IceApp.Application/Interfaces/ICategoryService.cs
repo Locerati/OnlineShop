@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IceApp.Domain.Models;
 
+
 namespace IceApp.Application.Interfaces
 {
     public interface ICategoryService
@@ -14,5 +15,7 @@ namespace IceApp.Application.Interfaces
         void Add(Category category);
 
         void Update(Category category);
+        void UpdateWithoutImg(Category category);
+        
     }
 }

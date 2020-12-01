@@ -1,0 +1,44 @@
+﻿@model SubcategoriesListViewModel;
+
+@{
+}
+<div class="row m-0 mx-md-5 pt-3 p-0">
+    <div class="col-12 ">
+
+        <a class="btn btn-success mb-3" asp-controller="Subcategories" asp-action="Create" asp-route-ParentId="@Model.ParentId" role="button">Добавить подкатегорию</a>
+        <a class="btn btn-link mb-3" asp-controller="Categories" asp-action="List" role="button">Вернуться к категориям</a>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Подкатегории</th>
+                    <th scope="col">Продукты</th>
+
+                    <th class="text-right" scope="col">Редактирование</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 1;
+                }
+                @foreach (var item in Model.subcategories)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@item.Name</td>
+                        <td><a class="btn btn-secondary" asp-controller="Products" asp-action="List" asp-route-scategoryId="@item.Id" role="button">Список продуктов</a></td>
+                        <td class="text-right">
+                            <a class="btn btn-warning " role="button" asp-action="Edit" asp-controller="Subcategories" asp-route-id="@item.Id">Изменить</a> |
+                            <a class="btn btn-danger mt-2 mt-sm-0" role="button" asp-action="Delete" asp-controller="Subcategories" asp-route-id="@item.Id">Удалить</a>
+
+                        </td>
+                        @{i++;
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

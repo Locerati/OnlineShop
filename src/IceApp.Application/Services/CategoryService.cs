@@ -45,6 +45,11 @@ namespace IceApp.Application.Services
         {
             _categorieRepository.Update(category);
         }
+
+        public void UpdateWithoutImg(Category category)
+        {
+            _categorieRepository.UpdateWithoutImg(category);
+        }
     }
 }
   

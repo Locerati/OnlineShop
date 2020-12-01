@@ -8,13 +8,17 @@ using IceApp.Application.Interfaces;
 
 namespace IceApp.Application.Services
 {
-    public class SubcategoryService:ISubcategorySevice
+    public class SubcategoryService:ISubcategoryService
     {
-        public ISubcategoriesRepository _categorieRepository;
+        public ISubcategoryRepository _categorieRepository;
 
-        public SubcategoryService(ISubcategoriesRepository scategorieRepository)
+        public SubcategoryService(ISubcategoryRepository scategorieRepository)
         {
             _categorieRepository = scategorieRepository;
+        }
+        public async Task<string> GetParentName(int id)
+        {
+           return await _categorieRepository.GetParentName(id);
         }
 
         public void Add(Category category)
@@ -40,6 +44,10 @@ namespace IceApp.Application.Services
         public void Update(Category category)
         {
             _categorieRepository.Update(category);
+        }
+        public void UpdateWithoutImg(Category category)
+        {
+            _categorieRepository.UpdateWithoutImg(category);
         }
     }
 }

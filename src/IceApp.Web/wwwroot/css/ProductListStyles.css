@@ -1,0 +1,22 @@
+﻿body {
+}
+h1.text-center {
+    font-family: 'Lobster';
+    font-size: 60px;
+    line-height: 57px;
+}
+.btn {
+    margin: 5px;
+}
+img.card-img-top {
+
+    
+    height: 15em;
+    width: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+
+}
+
+
+

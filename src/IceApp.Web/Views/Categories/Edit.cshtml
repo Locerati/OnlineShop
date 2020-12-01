@@ -8,7 +8,7 @@
 }
 <div class="row m-0 p-0 py-3">
 
-    <form class="col-md-4 offset-md-1" asp-action="Edit" asp-controller="Categories" asp-antiforgery="true" asp-route-id="@Model.Id" asp-route-Image="@Model.Image" enctype="multipart/form-data">
+    <form class="col-md-4 offset-md-1" asp-action="Edit" asp-controller="Categories" asp-antiforgery="true"  asp-route-id="@Model.Id"  enctype="multipart/form-data">
         <h2>Изменение категории</h2>
         <div class="form-group">
             <label for="Name">Введите название категории</label>
@@ -19,7 +19,7 @@
 
         <div class="form-group">
             <label class="form-check-label" for="ImagePth">Добавьте изображение</label>
-            <input type="file" id="ImagePth" name="uploadedFile" class="form-control-file"  accept="image/jpeg,image/png,image/jpg">
+            <input type="file" id="ImagePth" name="formFile" class="form-control-file" accept="image/jpeg,image/png,image/jpg">
         </div>
         @Html.ActionLink("Вернуться к категориям", "List")|
         <button type="submit" class="btn btn-primary">Изменить</button>

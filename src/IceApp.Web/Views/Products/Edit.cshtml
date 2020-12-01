@@ -1,0 +1,71 @@
+﻿@model ProductViewModel;
+@{
+    ViewBag.Title = "Редактирование продукта";
+}
+@section Styles{
+
+    <link href="~/css/validation-styles.css" rel="stylesheet">
+}
+<div class="row m-0 p-0 py-3">
+
+    <form class="col-md-4 offset-md-1" asp-action="Edit" asp-controller="Products" asp-antiforgery="true" asp-route-categoryId="@Model.CategoryId" method="post" enctype="multipart/form-data">
+        <h2>Изменение характеристик товара</h2>
+        <div class="form-group">
+            <label for="Name">Введите название продукта</label>
+            <input type="text" asp-for="Name" id="Name" class="form-control" autocomplete="off">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="Description">Введите описание</label>
+            <textarea asp-for="Description" id="Description" class="form-control" autocomplete="off"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+
+        </div>
+        <div class="form-group">
+            <label for="Weight">Введите вес в граммах</label>
+            <input type="number" asp-for="Weight" id="Weight" class="form-control" autocomplete="off">
+            <span asp-validation-for="Weight" class="text-danger"></span>
+
+        </div>
+        <div class="form-group">
+            <label for="DeliveryPeriod">Введите время доставки (дни и часы)</label>
+            <div class="form-row ml-1">
+                <input type="number" name="days" id="DeliveryPeriod" min="0" value="@TimeSpan.FromTicks(Model.DeliveryPeriod).Days" step="1" class="form-control col-2" placeholder="дни" required autocomplete="off">
+                <input type="number" name="hours" id="DeliveryPeriod1" min="0"value="@TimeSpan.FromTicks(Model.DeliveryPeriod).Hours" max="24" step="1" required placeholder="часы" class="form-control col-2 offset-1" autocomplete="off">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="Price">Введите цену в рублях</label>
+            <input asp-for="Price" id="Price" class="form-control" autocomplete="off">
+            <span asp-validation-for="Price" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group">
+            <label class="form-check-label" for="ImagePth">Добавьте изображение</label>
+            <input type="file" id="ImagePth" name="formFile" class="form-control-file"  accept="image/jpeg,image/png,image/jpg">
+        </div>
+        <a asp-controller="Products" asp-action="List" asp-route-scategoryId="@Model.CategoryId">Вернуться к продуктам</a>|
+        <button type="submit" class="btn btn-primary">Изменить</button>
+    </form>
+</div>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/Validations/ValidationFilesImage.js"></script>
+    <script>
+        // переопределение валидации на стороне клиента
+        $.validator.methods.range = function (value, element, param) {
+            var globalizedValue = value.replace(",", ".");
+            return this.optional(element) || (globalizedValue >= param[0] && globalizedValue <= param[1]);
+        }
+
+        $.validator.methods.number = function (value, element) {
+            return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
+        }
+    </script>
+
+}

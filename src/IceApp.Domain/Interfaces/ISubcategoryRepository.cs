@@ -6,13 +6,14 @@ using IceApp.Domain.Models;
 
 namespace IceApp.Domain.Interfaces
 {
-    public interface ISubcategoriesRepository
+    public interface ISubcategoryRepository
     {
         Task<Category> GetById(int id);
         Task<IEnumerable<Category>> GetSubcategories(int id);
         void Remove(int id);
         void Add(Category category);
-
+        void UpdateWithoutImg(Category category);
         void Update(Category category);
+        Task<string> GetParentName(int id);
     }
 }

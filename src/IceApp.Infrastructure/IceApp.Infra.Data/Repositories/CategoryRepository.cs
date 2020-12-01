@@ -26,8 +26,7 @@ namespace IceApp.Infra.Data.Repositories
             
             using (var db=new NpgsqlConnection(_connect))
             {
-                var cat = await db.QueryAsync<Category>("Select * from Categories");
-                    
+                var cat = await db.QueryAsync<Category>("Select * from Categories where ParentId is null");
                 return cat;
             }
             
@@ -53,28 +52,37 @@ namespace IceApp.Infra.Data.Repositories
             }
         }
 
-        public async void Remove(int id)
+        public  void Remove(int id)
         {
             using (var db = new NpgsqlConnection(_connect))
             {
-                await db.ExecuteAsync($"DELETE FROM Categories WHERE Id = {id};");
+                db.Execute($"DELETE FROM Categories WHERE Id = {id};");
                 
             }
         }
 
-        public async void Add(Category categ)
+        public void Add(Category categ)
         {
             using (var db = new NpgsqlConnection(_connect))
             {
-                await db.ExecuteAsync($"INSERT INTO Categories (Name,Image) VALUES ('{categ.Name}','{categ.Image}');");
+                //await db.ExecuteAsync($"INSERT INTO Categories (Name,Image) VALUES ('{categ.Name}','{categ.Image}');");
+                 db.Execute("INSERT INTO Categories (Name,Image) Values (@Name, @Image);", categ);
             }
         }
 
-        public async  void Update(Category categ)
+        public void Update(Category categ)
         {
             using (var db = new NpgsqlConnection(_connect))
             {
-                await db.ExecuteAsync($"UPDATE Categories SET Name='{categ.Name}', Image='{categ.Image}' WHERE Id={categ.Id};");
+                db.Execute($"UPDATE Categories SET Name=@Name, Image=@Image WHERE Id=@Id;",categ);
+            }
+        }
+
+        public void UpdateWithoutImg(Category categ)
+        {
+            using (var db = new NpgsqlConnection(_connect))
+            {
+                db.Execute($"UPDATE Categories SET Name=@Name WHERE Id=@Id;", categ);
             }
         }
     }

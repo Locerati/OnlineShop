@@ -1,0 +1,18 @@
+﻿@model SubcategoryViewModel;
+
+@{
+}
+<div class="row col-12 m-0 p-0 py-5 justify-content-center">
+
+    <h3 class="text-center">Вы уверены, что хотите удалить Подкатегорию  @Html.DisplayFor(model => model.Name)?</h3><br>
+
+</div>
+
+<div class="row col-12 m-0 p-0 pb-5 justify-content-center">
+    <form asp-controller="Subcategories" asp-action="Delete" asp-route-ParentId="@Model.ParentId" method="post">
+        <div class="form-group">
+            <a asp-controller="Subcategories" asp-action="List" asp-route-categoryId="@Model.ParentId">Вернуться к подкатегориям</a>|
+            <input type="submit" class="btn btn-danger" value="Удалить" />
+        </div>
+    </form>
+</div>

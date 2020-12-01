@@ -8,7 +8,7 @@ namespace IceApp.Domain.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
         public int? ParentId { get; set; }
         public Category Parent { get; set; }
 

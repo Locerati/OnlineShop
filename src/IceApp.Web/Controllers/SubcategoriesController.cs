@@ -11,63 +11,56 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace IceApp.Web.Controllers
 {
     public class SubcategoriesController : Controller
     {
-        private ICategoryService _categories;
-        IWebHostEnvironment _appEnvironment;
-        public SubcategoriesController(ICategoryService categorieService, IWebHostEnvironment appEnvironment)
+        private ISubcategoryService _scategories;
+        private readonly IMapper _mapper;
+        public SubcategoriesController(ISubcategoryService scategorieService, IMapper mapper)
         {
-            _categories = categorieService;
-            _appEnvironment = appEnvironment;
+            _mapper = mapper;
+            _scategories = scategorieService;
+
         }
         // GET: /<controller>/
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int categoryId)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Category, CategoryViewModel>());
-            var mapper = new Mapper(config);
-            var categoryViews = mapper.Map<IEnumerable<CategoryViewModel>>(await _categories.GetCategories());
-
-            return View(categoryViews);
+            var subcategoriesList = new SubcategoriesListViewModel();
+            subcategoriesList.subcategories = _mapper.Map<IEnumerable<SubcategoryViewModel>>(await _scategories.GetSubcategories(categoryId));
+            subcategoriesList.CategoryName = await _scategories.GetParentName(categoryId);
+            subcategoriesList.ParentId = categoryId;
+            return View(subcategoriesList);
         }
 
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(int categoryId)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Category, CategoryViewModel>());
-            var mapper = new Mapper(config);
-            var categoryViews = mapper.Map<IEnumerable<CategoryViewModel>>(await _categories.GetCategories());
-
-            return View(categoryViews);
+            var subcategoriesList =new SubcategoriesListViewModel();
+            subcategoriesList.subcategories = _mapper.Map<IEnumerable<SubcategoryViewModel>>(await _scategories.GetSubcategories(categoryId));
+            subcategoriesList.CategoryName = await _scategories.GetParentName(categoryId);
+            subcategoriesList.ParentId = categoryId;
+            return View(subcategoriesList); 
         }
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(int ParentId)
         {
-            return View();
+
+            return View(new SubcategoryViewModel { ParentId=ParentId} );
         }
         [HttpPost]
-        public async Task<IActionResult> Create(CategoryViewModel model, IFormFile uploadedFile)
+        public  IActionResult Create(SubcategoryViewModel model, IFormFile formFile)
         {
-            if (ModelState.IsValid && uploadedFile != null)
+            if (ModelState.IsValid && formFile != null)
             {
-
-                string path = "/Content/storeimages/categories/" + uploadedFile.FileName;
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                using (var binaryReader = new BinaryReader(formFile.OpenReadStream()))
                 {
-                    await uploadedFile.CopyToAsync(fileStream);
+                    model.Image = binaryReader.ReadBytes((int)formFile.Length);
                 }
-                model.Image = path;
-
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<CategoryViewModel, Category>());
-                var mapper = new Mapper(config);
-                var category = mapper.Map<Category>(model);
-                _categories.Add(category);
-
-                return RedirectToAction("List");
+                var scategory = _mapper.Map<Category>(model);
+                _scategories.Add(scategory);
+                return RedirectToAction("List",new {categoryId=model.ParentId });
             }
-
             else
                 return View(model);
         }
@@ -76,62 +69,58 @@ namespace IceApp.Web.Controllers
         [ActionName("Delete")]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Category, CategoryViewModel>());
-            var mapper = new Mapper(config);
-            var category = mapper.Map<CategoryViewModel>(await _categories.GetById(id));
-            if (category != null)
-                return View(category);
+            var scategory = _mapper.Map<SubcategoryViewModel>(await _scategories.GetById(id));
+            if (scategory != null)
+                return View(scategory);
             else
                 return NotFound();
         }
 
 
         [HttpPost]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, int ParentId)
         {
-
-            _categories.Remove(id);
-            return RedirectToAction("List");
+            _scategories.Remove(id);
+             return RedirectToAction("List", new { categoryId = ParentId });
 
         }
         public async Task<IActionResult> Edit(int id)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Category, CategoryViewModel>());
-            var mapper = new Mapper(config);
-            var category = mapper.Map<CategoryViewModel>(await _categories.GetById(id));
-            if (category != null)
-                return View(category);
+            var scategory = _mapper.Map<SubcategoryViewModel>(await _scategories.GetById(id));
+            if (scategory != null)
+                return View(scategory);
             else
                 return NotFound();
-
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(CategoryViewModel model, IFormFile uploadedFile)
+        public IActionResult Edit(SubcategoryViewModel model, IFormFile formFile)
         {
-            if (ModelState.IsValid)
+           if (ModelState.IsValid)
             {
-                if (uploadedFile != null)
+                if (formFile != null)
                 {
-                    string path = "/Content/storeimages/categories/" + uploadedFile.FileName;
-                    using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+
+                    using (var binaryReader = new BinaryReader(formFile.OpenReadStream()))
                     {
-                        await uploadedFile.CopyToAsync(fileStream);
+                        model.Image = binaryReader.ReadBytes((int)formFile.Length);
                     }
-                    model.Image = path;
+                    var scategory = _mapper.Map<Category>(model);
+                    _scategories.Update(scategory);
+                }
+                else
+                {
+                    var scategory = _mapper.Map<Category>(model);
+                    _scategories.UpdateWithoutImg(scategory);
+
                 }
 
-
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<CategoryViewModel, Category>());
-                var mapper = new Mapper(config);
-                var category = mapper.Map<Category>(model);
-                _categories.Update(category);
-
-                return RedirectToAction("List");
+                return RedirectToAction("List", new { categoryId = model.ParentId });
             }
 
             else
                 return View(model);
         }
+
+
     }
 }

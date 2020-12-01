@@ -1,0 +1,41 @@
+﻿@model ProductsListViewModel;
+
+@{
+}
+<div class="row m-0 mx-md-5 pt-3 p-0">
+    <div class="col-12 ">
+
+        <a class="btn btn-success mb-3" asp-controller="Products" asp-action="Create" asp-route-categoryId="@Model.CategoryId" role="button">Добавить продукт</a>
+        <a class="btn btn-link mb-3" asp-controller="Categories" asp-action="List" asp-route-categoryId="@Model" role="button">Вернуться к категориям</a>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Продукты</th>
+                    <th class="text-right" scope="col">Редактирование</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 1;
+                }
+                @foreach (var item in Model.products)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@item.Name</td>
+                        
+                        <td class="text-right">
+                            <a class="btn btn-warning " role="button" asp-action="Edit" asp-controller="Products" asp-route-id="@item.Id">Изменить</a> |
+                            <a class="btn btn-danger mt-2 mt-sm-0" role="button" asp-action="Delete" asp-controller="Product" asp-route-id="@item.Id">Удалить</a>
+                        </td>
+                        @{i++;
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

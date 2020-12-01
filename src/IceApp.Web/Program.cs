@@ -13,7 +13,14 @@ namespace IceApp.Web
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog("Nlog.config").GetCurrentClassLogger();
+            try {
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch(Exception ex)
+            {
+                logger.Error(ex,"Something went wrong!")
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

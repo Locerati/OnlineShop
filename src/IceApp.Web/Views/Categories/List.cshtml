@@ -2,42 +2,42 @@
 
 @{
 }
-    <div class="row m-0 mx-md-5 pt-3 p-0">
-        <div class="col-12 ">
+<div class="row m-0 mx-md-5 pt-3 p-0">
+    <div class="col-12 ">
 
-            <a class="btn btn-success mb-3"  asp-controller="Categories" asp-action="Create"  role="button">Добавить категорию</a>
-            <table class="table">
-                <thead class="thead-dark">
+        <a class="btn btn-success mb-3" asp-controller="Categories" asp-action="Create"  role="button">Добавить категорию</a>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Категори</th>
+                    <th scope="col">Подкатегории</th>
+
+                    <th class="text-right" scope="col">Редактирование</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 1;
+                }
+                @foreach (var item in Model)
+                {
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Категори</th>
-                        <th scope="col">Подкатегории</th>
+                        <td>@i</td>
+                        <td>@item.Name</td>
+                        <td><a class="btn btn-secondary" asp-controller="Subcategories" asp-action="List" asp-route-categoryId="@item.Id" role="button">Подкатегории</a></td>
+                        <td class="text-right">
+                            <a class="btn btn-warning " role="button" asp-action="Edit" asp-controller="Categories" asp-route-id="@item.Id">Изменить</a> |
+                            <a class="btn btn-danger mt-2 mt-sm-0" role="button" asp-action="Delete" asp-controller="Categories" asp-route-id="@item.Id">Удалить</a>
 
-                        <th class="text-right" scope="col">Редактирование</th>
-
+                        </td>
+                        @{i++;
+                        }
                     </tr>
-                </thead>
-                <tbody>
-              @{ 
-                  int i = 1;
-              }
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@i</td>
-                            <td>@item.Name</td>
-                            <td><a class="btn btn-secondary" href="#" role="button">Подкатегории</a></td>
-                            <td class="text-right">
-                                <a class="btn btn-warning " role="button" asp-action="Edit" asp-controller="Categories" asp-route-id="@item.Id">Изменить</a> |
-                                <a class="btn btn-danger mt-2 mt-sm-0" role="button" asp-action="Delete" asp-controller="Categories" asp-route-id="@item.Id">Удалить</a>
+                }
+            </tbody>
+        </table>
 
-                            </td>
-                            @{i++;
-                            }
-                        </tr>
-                    }
-                </tbody>
-            </table>
-
-        </div>
-        </div>
+    </div>
+</div>

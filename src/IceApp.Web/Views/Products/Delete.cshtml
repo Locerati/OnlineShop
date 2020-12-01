@@ -1,0 +1,18 @@
+﻿@model ProductViewModel;
+
+@{
+}
+<div class="row col-12 m-0 p-0 py-5 justify-content-center">
+
+    <h3 class="text-center">Вы уверены, что хотите удалить  @Html.DisplayFor(model => model.Name)?</h3><br>
+
+</div>
+
+<div class="row col-12 m-0 p-0 pb-5 justify-content-center">
+    <form asp-controller="Products" asp-action="Delete" asp-route-ParentId="@Model.CategoryId" method="post">
+        <div class="form-group">
+            <a asp-controller="Products" asp-action="List" asp-route-categoryId="@Model.CategoryId">Вернуться к списку продуктов</a>|
+            <input type="submit" class="btn btn-danger" value="Удалить" />
+        </div>
+    </form>
+</div>

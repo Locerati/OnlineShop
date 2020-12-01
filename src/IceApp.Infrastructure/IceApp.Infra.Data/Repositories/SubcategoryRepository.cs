@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace IceApp.Infra.Data.Repositories
 {
-    public class SubcategoryRepository:ISubcategoriesRepository
+    public class SubcategoryRepository:ISubcategoryRepository
     {
         private string _connect;
         public SubcategoryRepository(IConfiguration connectionString)
@@ -36,33 +36,48 @@ namespace IceApp.Infra.Data.Repositories
         {
             using (var db = new NpgsqlConnection(_connect))
             {
-                var scat = await db.QueryAsync<Category>($"Select * from Categories where ParentId={id}");
+                var scat = await db.QueryAsync<Category>($"Select * from Categories where ParentId = {id}; ");
+                return scat;
+            }
+        }
+        public async Task<string> GetParentName(int id)
+        {
+            using (var db = new NpgsqlConnection(_connect))
+            {
+                var scat = await db.QuerySingleOrDefaultAsync<string>($"Select Name from Categories where Id = {id}; ");
                 return scat;
             }
         }
 
-        public async void Remove(int id)
+        public void Remove(int id)
         {
             using (var db = new NpgsqlConnection(_connect))
             {
-                await db.ExecuteAsync($"DELETE FROM Categories WHERE Id = {id};");
+               db.Execute($"DELETE FROM Categories WHERE Id = {id};");
 
             }
         }
 
-        public async void Add(Category categ)
+        public  void Add(Category categ)
         {
             using (var db = new NpgsqlConnection(_connect))
             {
-                await db.ExecuteAsync($"INSERT INTO Categories (Name,Image) VALUES ('{categ.Name}','{categ.Image}');");
+                 db.Execute("INSERT INTO Categories (Name,Image,ParentId) Values (@Name, @Image,@ParentId);", categ);
             }
         }
 
-        public async void Update(Category categ)
+        public void Update(Category categ)
         {
             using (var db = new NpgsqlConnection(_connect))
             {
-                await db.ExecuteAsync($"UPDATE Categories SET Name='{categ.Name}', Image='{categ.Image}' WHERE Id={categ.Id};");
+                db.Execute($"UPDATE Categories SET Name=@Name, Image=@Image WHERE Id=@Id;", categ);
+            }
+        }
+        public void UpdateWithoutImg(Category categ)
+        {
+            using (var db = new NpgsqlConnection(_connect))
+            {
+                db.Execute($"UPDATE Categories SET Name=@Name WHERE Id=@Id;", categ);
             }
         }
     }

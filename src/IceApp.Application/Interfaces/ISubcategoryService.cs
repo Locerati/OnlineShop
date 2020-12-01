@@ -6,13 +6,14 @@ using IceApp.Domain.Models;
 
 namespace IceApp.Application.Interfaces
 {
-    interface ISubcategorySevice
+    public interface ISubcategoryService
     {
         Task<Category> GetById(int id);
         Task<IEnumerable<Category>> GetSubcategories(int id);
         void Remove(int id);
         void Add(Category category);
-
+        void UpdateWithoutImg(Category category);
         void Update(Category category);
+        Task<string> GetParentName(int id);
     }
 }

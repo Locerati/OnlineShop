@@ -1,0 +1,92 @@
+﻿@model ProductViewModel;
+
+@section Styles{
+    <link href="~/css/ProductInfoStyles.css" rel="stylesheet">
+}
+<input type="hidden" value="@Model.Id" id="ProductId" />
+<div class="row m-0 mb-3 p-0 pt-3">
+    <div class="col text-center text-md-left offset-md-1">
+        <strong id="ProductName">
+            @Model.Name
+        </strong>
+    </div>
+</div>
+<div class="row m-0 p-0">
+    <div class="product-main-information section d-flex flex-column flex-md-row">
+        <img class="img-rounded zoom" src="data:image;base64,@Convert.ToBase64String(Model.Image)" />
+
+        <div class="pdp-pay d-flex flex-column">
+            <b id="price">@Model.Price &#8381;</b>
+            <p>Вес товара: @Model.Weight г</p>
+            <b>
+                <i class="fas fa-shipping-fast"></i>&ensp;Способы получения заказа
+            </b>
+            @{
+                var time = TimeSpan.FromTicks(Model.DeliveryPeriod);
+            }
+            <p class=" m-0 p-0 mt-2">Доставка курьером за @time.Days дней @time.Hours часов</p>
+            <p class="mt-1 mb-5"><a asp-controller="Contacts" asp-action="Maps" class="text-primary">Самовывоз </a>из 2 магазинов сегодня или позже</p>
+            <form>
+                <p>Количество товара:</p>
+                <div class="quantity_inner">
+
+                    <span class="input-group-btn">
+                        <button id="minus" class="btn btn-warning" type="button">-</button>
+                    </span>
+                    <input type="text" id="calc" value="1" step="10" min="0" max="100" data-max-count="20" class="form-control">
+
+                    <span class="input-group-btn">
+                        <button id="plus" class="btn btn-success" type="button">+</button>
+                    </span>
+                </div>
+                <button asp-controller="" asp-action="" type="submit" class="btn btn-danger btn-icon">
+                    <span class="icon mr-3"><i class="fas fa-shopping-cart"></i></span>В корзину
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>
+<div class="row m-3  m-md-5">
+    <div class="col">
+        <h2>Описание</h2>
+        <p id="Descripton">@Model.Description</p>
+    </div>
+</div>
+
+<div class="row m-3 ml-md-5  p-0">
+    <div class="col">
+        <h2>Комментарии</h2>
+    </div>
+</div>
+
+<div class="comments_area">
+    <div class="comment_messages">
+
+    </div>
+
+</div>
+<div id='upload_comments'>
+    <hr class="hr-text" data-content="Показать больше комментариев">
+</div>
+
+
+<div class="row m-0 my-5 ml-md-5 p-0">
+
+    <div class="col-12 col-md-6">
+        <form name="comment">
+            <div class="form-group">
+                <label for="comment_text text-info">Комментировать</label>
+                <textarea placeholder="Комментарий" rows="20" name="commenttext" id="comment_text" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list"></textarea>
+                <p id="Success_send" style="display:none; color:green">&#10003; Комментарий отправлен</p>
+            </div>
+            <button id="AddComment" data-productId="@Model.Id" type="submit" class="btn btn-secondary">Отправить</button>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/js/bootstrap-input-spinner.js"></script>
+    <script type="text/javascript" src="~/js/ProductInfo.js"></script>
+
+}
