@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using IceApp.Web.Models;
+using Microsoft.Extensions.Logging;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,10 +23,11 @@ namespace IceApp.Web.Controllers
         {
             _mapper = mapper;
             _categories = categorieService;
+       
         }
         // GET: /<controller>/
         public async Task<IActionResult> Index()
-        {     
+        {
             var categoryViews = _mapper.Map<IEnumerable<CategoryViewModel>>(await _categories.GetCategories());
             return View(categoryViews);
         }

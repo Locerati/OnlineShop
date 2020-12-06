@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using IceApp.Infra.IoC;
 using IceApp.Web.AutoMapper;
+using IceApp.Web.Logger;
 namespace IceApp.Web
 {
     public class Startup
@@ -27,11 +28,13 @@ namespace IceApp.Web
             AutoMapperIo.RegisterMappings(services);
             DependencyContainer.RegisterServices(services);
             services.AddControllersWithViews();
+      
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.ConfigureCustomExceptionMiddleware();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

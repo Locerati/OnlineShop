@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NLog.Web;
 
 namespace IceApp.Web
 {
@@ -19,7 +20,12 @@ namespace IceApp.Web
             }
             catch(Exception ex)
             {
-                logger.Error(ex,"Something went wrong!")
+                logger.Error(ex, "Something went wrong!");
+                throw;
+            }
+            finally
+            {
+                NLog.LogManager.Shutdown();
             }
         }
 
@@ -28,6 +34,7 @@ namespace IceApp.Web
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                }).ConfigureLogging(u=> { u.ClearProviders();u.SetMinimumLevel(LogLevel.Debug); }).UseNLog();
+              
     }
 }
