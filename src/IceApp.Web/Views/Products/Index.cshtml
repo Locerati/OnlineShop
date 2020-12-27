@@ -11,11 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
     <link href="~/css/ProductListStyles.css" rel="stylesheet"/>
 }
-<div class="row m-0 px-0 pb-3 pt-4 justify-content-center">
-    <div class="">
-        <h1 class="text-center">@Model.ParentName</h1>
-    </div>
-</div>
 
 <div class="row  row-cols-1 row-cols-sm-2  row-cols-lg-4 m-0 p-0 px-3">
 
@@ -33,9 +28,10 @@
                         </a>
                         <p class="card-text text-secondary"><i class="fas fa-comment"></i> @cat.CountOfComments Коментариев</p>
                         <p class="m-0 p-0" style="font-size:1.5em"><b>@cat.Price &#8381;</b></p>
-                        <button asp-controller="" asp-action="" type="button" class="btn btn-danger btn-icon">
+                        <input type="hidden" class="addInfo" data-ProductId="@cat.Id" />
+                        <a role="button" class="addProduct btn stretched-link btn-danger text-white btn-icon">
                             <span class="icon mr-3"><i class="fas fa-shopping-cart"></i></span>В корзину
-                        </button>
+                        </a>
 </div>
             </div>
         </div>
@@ -43,3 +39,6 @@
      }
 
         </div>
+@section Scripts{ 
+<script src="~/js/AddProduct.js"></script>
+}

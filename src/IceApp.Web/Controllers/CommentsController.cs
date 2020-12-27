@@ -19,18 +19,26 @@ namespace IceApp.Web.Controllers
         private ICommentService _commentService;
         private readonly IMapper _mapper;
         IWebHostEnvironment _appEnvironment;
-        public CommentsController(ICommentService commentService, IMapper mapper,IWebHostEnvironment appEnviroment)
+        IUserService _userService;
+        public CommentsController(ICommentService commentService,IUserService userService, IMapper mapper,IWebHostEnvironment appEnviroment)
         {
             _commentService = commentService;
             _mapper = mapper;
             _appEnvironment = appEnviroment;
+            _userService = userService;
         }
         [HttpPost]
-        public void AddComment(CommentViewModel commentViewModel)
+        public async void AddComment(CommentViewModel commentViewModel)
         {
             if (commentViewModel.TextComment != null)
             {
-                _commentService.Add(_mapper.Map<Comment>(commentViewModel));
+                var comment = _mapper.Map<Comment>(commentViewModel);
+                if (HttpContext.User.Identity.IsAuthenticated) //Если пользователь не гость то получаем его id для коментария
+                {
+                    
+                    comment.UserId = await _userService.GetUserIdByEmail(HttpContext.User.Identity.Name); ;
+                }
+                _commentService.Add(comment);
             }
 
         }
@@ -46,7 +54,7 @@ namespace IceApp.Web.Controllers
             string path = "/images/badges/ann.jpg";
             foreach (CommentViewModel i in Comments)
             {
-                if (i.Image.Length==0)
+                if (i.Image.Length==0)  //если у пользователя нет изображения используем исходное
                 {
                  
                     i.Image = System.IO.File.ReadAllBytes(_appEnvironment.WebRootPath + path);

@@ -26,22 +26,23 @@
             }
             <p class=" m-0 p-0 mt-2">Доставка курьером за @time.Days дней @time.Hours часов</p>
             <p class="mt-1 mb-5"><a asp-controller="Contacts" asp-action="Maps" class="text-primary">Самовывоз </a>из 2 магазинов сегодня или позже</p>
-            <form>
+            <form >
                 <p>Количество товара:</p>
                 <div class="quantity_inner">
 
                     <span class="input-group-btn">
                         <button id="minus" class="btn btn-warning" type="button">-</button>
                     </span>
-                    <input type="text" id="calc" value="1" step="10" min="0" max="100" data-max-count="20" class="form-control">
+                    <input type="text" name="Quantity" id="calc" value="1" step="10" min="0" max="100" data-max-count="20" class="form-control">
 
                     <span class="input-group-btn">
                         <button id="plus" class="btn btn-success" type="button">+</button>
                     </span>
                 </div>
-                <button asp-controller="" asp-action="" type="submit" class="btn btn-danger btn-icon">
+                <input type="hidden" class="addInfo" data-ProductId="@Model.Id" />
+                <a type="submit" class="addProduct btn btn-danger text-white btn-icon">
                     <span class="icon mr-3"><i class="fas fa-shopping-cart"></i></span>В корзину
-                </button>
+                </a>
             </form>
         </div>
 
@@ -88,5 +89,6 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/js/bootstrap-input-spinner.js"></script>
     <script type="text/javascript" src="~/js/ProductInfo.js"></script>
+    <script src="~/js/AddProduct.js"></script>
 
 }

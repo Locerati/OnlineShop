@@ -13,6 +13,8 @@ namespace IceApp.Domain.Interfaces
         Task<Category> GetById(int id);
         void Add(Category categ);
         void Update(Category categ);
+        public void UpdateDiscount(int discount, int categId);
+        public void ResetDiscount(int categId);
         void UpdateWithoutImg(Category category);
         void Remove(int id);
     }

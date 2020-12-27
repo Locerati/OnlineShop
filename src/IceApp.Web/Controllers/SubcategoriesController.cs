@@ -10,10 +10,11 @@ using IceApp.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace IceApp.Web.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class SubcategoriesController : Controller
     {
         private ISubcategoryService _scategories;
@@ -25,6 +26,7 @@ namespace IceApp.Web.Controllers
 
         }
         // GET: /<controller>/
+        [AllowAnonymous]
         public async Task<IActionResult> Index(int categoryId)
         {
             var subcategoriesList = new SubcategoriesListViewModel();
@@ -33,7 +35,7 @@ namespace IceApp.Web.Controllers
             subcategoriesList.ParentId = categoryId;
             return View(subcategoriesList);
         }
-
+        //Список подкатегорий для админа
         public async Task<IActionResult> List(int categoryId)
         {
             var subcategoriesList =new SubcategoriesListViewModel();

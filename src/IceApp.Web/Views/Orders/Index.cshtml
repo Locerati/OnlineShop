@@ -1,0 +1,39 @@
+﻿@model IceApp.Web.Controllers.OrdersViewModel
+@section Styles{
+    <style>
+        td, tr {
+            text-align: center;
+        }
+    </style>
+}
+<div class="row m-0 p-0">
+    <h1 class="m-4">Заказы</h1>
+    <table class="table m-auto">
+        <thead class="thead-light ">
+            <tr>
+                <th scope="col text-center">№ Заказа</th>
+                <th scope="col">Дата</th>
+                <th scope="col">Итоговая цена</th>
+                <th scope="col">Подробнее</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model.OrderList)
+            {
+            <tr>
+                <th scope="row">@i.Id</th>
+                <td>@i.OrderDate</td>
+                <td>@i.TotalPrice</td>
+                <td><a type="button" asp-controller="Orders" asp-action="Details" asp-route-orderId="@i.Id" class="btn btn-primary">Информация о заказе</a></td>
+            </tr>
+            }
+           
+        </tbody>
+    </table>
+
+
+    </table>
+
+</div>
+
+

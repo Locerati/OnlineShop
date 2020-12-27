@@ -16,6 +16,11 @@ namespace IceApp.Web.AutoMapper
             CreateMap< SubcategoryViewModel, Category>();
             CreateMap<ProductViewModel, Product>();
             CreateMap<CommentViewModel, Comment>();
+            CreateMap<RegisterViewModel, UserModel>()
+                .ForMember(m=>m.UserName,opt=>opt.MapFrom(c=>c.Surname+' '+c.Name+' '+c.Patronymic));
+            CreateMap<RegisterViewModel, UserIdentity >();
+            CreateMap<BasketItemViewModel, Basket>();
+            CreateMap<UserViewModel, UserModel>();
         }
     }
 }

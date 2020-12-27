@@ -21,9 +21,12 @@ a.navbar-brand img{
 }
 
 
+a.dropdown-item:active {
+    background-color: #A19FA0;
+}
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {

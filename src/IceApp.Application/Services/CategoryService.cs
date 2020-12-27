@@ -21,7 +21,10 @@ namespace IceApp.Application.Services
         {
             _categorieRepository.Add(category);
         }
-
+        public void UpdateDiscount(int discount, int categId)
+        {
+            _categorieRepository.UpdateDiscount(discount, categId);
+        }
         public async Task<Category> GetById(int id)
         {
             return await _categorieRepository.GetById(id);
@@ -33,8 +36,12 @@ namespace IceApp.Application.Services
             return await _categorieRepository.GetCategories(); 
             
         }
+        public void ResetDiscount(int categId)
+        {
+            _categorieRepository.ResetDiscount(categId);
+        }
 
-      
+
 
         public void Remove(int id)
         {

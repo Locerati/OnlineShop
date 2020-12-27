@@ -18,5 +18,6 @@ namespace IceApp.Application.Interfaces
         void Update(Product product);
         Task<string> GetParentName(int id);
         Task<IEnumerable<ProductCountComments>> GetProductsWithContComments(int parentId);
+        
     }
 }

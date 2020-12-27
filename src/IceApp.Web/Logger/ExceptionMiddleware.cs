@@ -24,10 +24,12 @@ namespace IceApp.Web.Logger
         {
             try
             {
+                
                 await _next(httpContext);
             }
             catch (Exception ex)
             {
+                
                 _logger.LogError($"Something went wrong: {ex}");
                 await HandleExceptionAsync(httpContext, ex);
             }

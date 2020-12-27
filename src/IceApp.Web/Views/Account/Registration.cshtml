@@ -1,0 +1,95 @@
+﻿@{
+}
+@model RegisterViewModel;
+@section Styles{
+    <link rel="stylesheet" href="~/css/Registration.css" />
+
+}
+<div class="row m-0 p-0">
+    <div class=" login-block p-4 shadow rounded">
+        <h3>Регистрация</h3>
+        <form class="needs-validation" novalidate method="post" asp-antiforgery="true">
+
+            <div class="form-group">
+                <label for="RegistrationName">Имя</label>
+                <input type="text" class="form-control" id="RegistrationName" required="" name="Name">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Введите Имя
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="RegistrationSurname">Фамилия</label>
+                <input type="text" class="form-control" id="RegistrationSurname" required="" name="Surname">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Введите Фамилию
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="RegistrationPatronymic">Отчество</label>
+                <input type="text" class="form-control" id="RegistrationPatronymic" required="" name="Patronymic">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Введите Отчество
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" required placeholder="Enter email" name="Email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <div class="invalid-feedback">
+                    Неверно введен email
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="AddressInput">Аддрес проживания</label>
+                <input type="text" class="form-control" id="AddressInput" required="" name="Address">
+                <div class="invalid-feedback">
+                    Please provide a valid address.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="PhoneInput">Номер телефона</label>
+                <input type="tel" class="form-control" placeholder="+7 (900) 123-45-67" pattern="\+7\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}" id="PhoneInput" required name="PhoneNumber">
+                <div class="invalid-feedback">
+                    Пожалуйста введите ваш номер в фомате +7 900 123-45-67 .
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input type="password" id="inputPassword" class="form-control" required minlength="8" maxlength="20" aria-describedby="passwordHelp" name="Password">
+                <small id="passwordHelp" class="form-text text-muted">Must be 8-20 characters long.</small>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Повторите Password</label>
+                <input type="password" id="confirm_password" class="form-control" required minlength="8" maxlength="20" aria-describedby="passwordHelp2" name="PasswordConfirm">
+                <small id="passwordHelp2" class="form-text text-muted">Must be 8-20 characters long.</small>
+                <div class="invalid-feedback">
+                    Пароли не совпадают
+                </div>
+            </div>
+            <div class="form-text text-danger">
+                <div class="validation" asp-validation-summary="ModelOnly"></div>
+            </div>
+
+
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit" href="">Зарегистрироваться</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/AccountScript.js"></script>
+}

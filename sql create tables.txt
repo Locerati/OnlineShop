@@ -1,0 +1,95 @@
+drop table if exists OrderItems;
+drop table if exists Orders;
+drop table if exists Comments;
+drop table if exists Baskets;
+drop table if exists Products;
+drop table if exists categories;
+drop table if exists Users;
+
+CREATE TABLE Roles (
+	Id Serial primary key,
+    Name CHARACTER VARYING(50) not null
+);
+CREATE TABLE Users (
+	Id Serial primary key,
+	UserName Character Varying(255) NOT NULL,
+	Address Character Varying(255),
+	PhoneNumber Character Varying(255) NOT NULL,
+        Image BYTEA,
+	RoleId Integer references Roles(Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+CREATE TABLE Orders (
+	Id Serial primary key,
+	Address Character Varying,
+	PaymentMethod Character Varying(255) NOT NULL,
+	TotalPrice integer NOT NULL,
+	Date timestamp NOT NULL
+);
+
+create table Categories
+(
+	Id Serial primary key,
+	Name Character Varying(40) Not null,
+	Image BYTEA,
+	ParentId Integer references Categories (Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Products
+(
+    Id SERIAL PRIMARY KEY,
+    Name CHARACTER VARYING(30) not null,
+    Description text,
+    Weight integer,
+    Image  BYTEA,
+	DeliveryPeriod bigint,
+	Price money,
+	CategoryId integer References Categories(Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+
+CREATE TABLE Baskets (
+	Id Serial primary key,
+	ProductId integer  references Products (Id),
+	UserId integer  references Users (Id) ON DELETE CASCADE ON UPDATE CASCADE,
+	Quantity integer NOT NULL
+);
+
+
+
+CREATE TABLE Comments (
+	Id Serial primary key,
+	ProductId integer references Products (Id) ON DELETE CASCADE ON UPDATE CASCADE,
+	UserId integer references Users (Id) ON DELETE SET NULL,
+	TextComment text NOT NULL
+	);
+
+
+
+CREATE TABLE OrderItems (
+	Id Serial primary key,
+	UserId integer NOT NULL references Users (Id),
+	ProductId integer NOT NULL references Products (Id),
+	OrderId integer NOT NULL references Orders (Id) ON DELETE CASCADE ON UPDATE CASCADE
+        Quantity integer
+	);
+
+     CREATE TABLE NlogDBLog (
+    Id SERIAL PRIMARY KEY,
+	Application CHARACTER VARYING(50) not null,
+    Logged timestamp not null,
+    Level CHARACTER VARYING(50) not null,
+    Message text not null,
+	Logger CHARACTER VARYING(250) null,
+    Callsite text null,
+    Exception text null
+);
+CREATE TABLE UserIdentity (
+	Id Serial primary key,
+	Email Character Varying(255) NOT NULL,
+	Password Character Varying(255) NOT NULL,
+        UsersId integer References Users(Id) ON DELETE CASCADE ON UPDATE CASCADE
+
+);

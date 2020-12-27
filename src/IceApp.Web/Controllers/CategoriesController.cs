@@ -10,11 +10,12 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using IceApp.Web.Models;
 using Microsoft.Extensions.Logging;
-
+using Microsoft.AspNetCore.Authorization;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace IceApp.Web.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class CategoriesController : Controller
     {
         private ICategoryService _categories;
@@ -25,13 +26,15 @@ namespace IceApp.Web.Controllers
             _categories = categorieService;
        
         }
+        //Главная страница с категориями
         // GET: /<controller>/
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var categoryViews = _mapper.Map<IEnumerable<CategoryViewModel>>(await _categories.GetCategories());
             return View(categoryViews);
         }
-
+        //Список категорий для админа
         public async Task<IActionResult> List()
         {            
             var categoryViews = _mapper.Map<IEnumerable<CategoryViewModel>>(await _categories.GetCategories());
@@ -49,7 +52,7 @@ namespace IceApp.Web.Controllers
             {             
                 using (var binaryReader=new BinaryReader(formFile.OpenReadStream()))
                 {
-                    model.Image =binaryReader.ReadBytes((int)formFile.Length);
+                    model.Image =binaryReader.ReadBytes((int)formFile.Length);  //Преобразуем изображение в массив байт
                 }
                 var category = _mapper.Map<Category>(model);                
                 _categories.Add(category);
@@ -58,13 +61,28 @@ namespace IceApp.Web.Controllers
             else
                 return View(model);
         }
+        [HttpPost]
+        public void CreateDiscount(int discount,int categId)
+        {
+            if (discount>0&&discount<16)
+            {
+                _categories.UpdateDiscount(discount,categId);
+            }
+
+            
+        }
+        [HttpPost]
+        public void ResetDiscount(int categId)
+        {
+             _categories.ResetDiscount( categId);
+        }
 
         [HttpGet]
         [ActionName("Delete")]
         public async Task<IActionResult> ConfirmDelete(int id)
         {   
             var category = _mapper.Map<CategoryViewModel>(await _categories.GetById(id));
-            if (category != null)
+            if (category != null)  //Проверяем есть ли данный объект в бд
                 return View(category);
             else
                 return NotFound();
@@ -92,7 +110,7 @@ namespace IceApp.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                if (formFile != null)
+                if (formFile != null) //Если есть изображение преобразуем его в массив байт и обновляем бд
                 {
                     
                     using (var binaryReader = new BinaryReader(formFile.OpenReadStream()))
@@ -103,7 +121,7 @@ namespace IceApp.Web.Controllers
                     _categories.Update(category);
 
                 }
-                else
+                else  //иначе без преобразования изображения обновляем бд
                 {
                     var category = _mapper.Map<Category>(model);
                     _categories.UpdateWithoutImg(category);

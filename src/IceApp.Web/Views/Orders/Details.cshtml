@@ -1,0 +1,77 @@
+﻿@model OrderInfoViewModel;
+@section Styles{
+    <link rel="stylesheet" href="~/css/Basket.css" />
+}
+<div class="row m-0 p-0">
+    <div class="header col-12">
+        <h2 class=" m-0 pt-3 ml-5 pl-5">Информация о заказе №@Model.Id</h2>
+    </div>
+
+    <div class="basketItems d-flex flex-row w-100">
+
+        <div class="row col-8 m-0 mb-5 p-0">
+            @foreach (var item in Model.ProductsList)
+            {
+
+                <div class="item-in-basket col-10 offset-1 shadow mt-5 p-0" style="max-height:170px;">
+                    <div class="d-flex flex-row">
+                        <img src="data:image;base64,@Convert.ToBase64String(item.Image)">
+                        <div class="item-in-basket__info">
+                            <p class="m-0 mt-2">@item.Name</p>
+                            <p class='m-1 text-secondary'>
+                                Вес: @item.Weight гр
+                            </p>
+                            @{
+                                var time = TimeSpan.FromTicks(item.DeliveryPeriod);
+                            }
+                            <p class='m-1 text-secondary'>
+                                Срок доставки: @time.Days дней @time.Hours часов
+                            </p>
+                            <p class='m-1 text-secondary'>
+                                Количество: @item.Quantity
+                            </p>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            }
+
+
+        </div>
+
+
+
+        <div class="mt-5 border basket-right ">
+            <div class="do-order-total-line h3">
+                <h3 class="text-center mb-3">Информаци о заказе</h3>
+
+            </div>
+            <div style="font-size:1.1em" class="order_information">
+                <p><strong>№ заказа:</strong> @Model.Id</p>
+                @if (User.IsInRole("admin"))
+                {
+                    <p><strong>Имя покупателя:</strong> @Model.UserName</p>
+                    <p><strong>Номер телефона:</strong> @Model.Phone</p>
+                }
+                @if (@Model.Address != null)
+                {
+                    <p><strong>Адрес:</strong> @Model.Address</p>
+                }
+                <p><strong>Способ доставки:</strong> @Model.DeliveryMethod</p>
+                <p><strong>Способ оплаты:</strong> @Model.PaymentMethod</p>
+                <p><strong>Дата заказа:</strong> @Model.OrderDate</p>
+                <p><strong>Количество единиц товара:</strong> @Model.CountOfProducts</p>
+            </div>
+            <div class="do-order-total-line h3">
+                <span>Итого</span>
+                <span class="flRight do-order-total-price">
+                    @Model.TotalPrice&nbsp;₽
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+</div>

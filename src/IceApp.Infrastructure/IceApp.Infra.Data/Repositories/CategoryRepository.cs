@@ -77,7 +77,20 @@ namespace IceApp.Infra.Data.Repositories
                 db.Execute($"UPDATE Categories SET Name=@Name, Image=@Image WHERE Id=@Id;",categ);
             }
         }
-
+        public void UpdateDiscount(int discount,int categId)
+        {
+            using (var db = new NpgsqlConnection(_connect))
+            {
+                db.Execute($"UPDATE Categories SET Discount={discount} WHERE Id={categId};");
+            }
+        }
+        public void ResetDiscount(int categId)
+        {
+            using (var db = new NpgsqlConnection(_connect))
+            {
+                db.Execute($"UPDATE Categories SET Discount=NULL WHERE Id={categId};");
+            }
+        }
         public void UpdateWithoutImg(Category categ)
         {
             using (var db = new NpgsqlConnection(_connect))

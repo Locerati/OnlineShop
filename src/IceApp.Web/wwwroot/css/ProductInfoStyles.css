@@ -93,7 +93,7 @@ button.btn.btn-decrement.btn-outline-secondary.btn-minus ~ input {
     width: 40%;
 }
 
-button.btn.btn-danger.btn-icon {
+.addProduct {
     width: 100%;
     margin-top: 20px;
     font-size: 1.3em;

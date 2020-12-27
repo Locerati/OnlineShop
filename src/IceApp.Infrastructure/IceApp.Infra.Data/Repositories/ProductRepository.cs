@@ -92,5 +92,6 @@ namespace IceApp.Infra.Data.Repositories
                 db.Execute($"UPDATE Products SET Name=@Name,Description=@Description,Weight=@Weight,Deliveryperiod=@Deliveryperiod,Price=@Price,CategoryId=@CategoryId WHERE Id=@Id;", product);
             }
         }
+        
     }
 }

@@ -1,0 +1,35 @@
+﻿.item-in-basket img {
+    height: 120px;
+    margin: 15px;
+}
+
+.item-in-basket__price {
+    font-size: 1.3em;
+}
+
+div.item-in-basket__delete {
+    display: flex;
+    justify-content: flex-end;
+}
+
+div.basket-right {
+    margin: 0px 20px 20px 20px;
+    padding: 20px;
+    width: 400px;
+    height: fit-content;
+}
+
+div.countProducts {
+    font-size: 0.7em;
+    color: gray;
+}
+.item-in-basket__deleteLink {
+    border: none;
+    background-color: inherit;
+    cursor:pointer;
+}
+img.UploadImage {
+    display: none;
+    width: 34px;
+    margin-left:9px;
+}

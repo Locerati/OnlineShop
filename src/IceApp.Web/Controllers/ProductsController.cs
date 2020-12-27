@@ -9,11 +9,12 @@ using AutoMapper;
 using IceApp.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
-
+using Microsoft.AspNetCore.Authorization;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace IceApp.Web.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class ProductsController : Controller
     {
         private IProductService _productserv;
@@ -27,6 +28,7 @@ namespace IceApp.Web.Controllers
 
         }
         // GET: /<controller>/
+        [AllowAnonymous]
         public async Task<IActionResult> Index(int scategoryId)
         {
             var productsList = new ProductsListViewModel();
@@ -34,7 +36,7 @@ namespace IceApp.Web.Controllers
             productsList.ParentName =await _productserv.GetParentName(scategoryId);
             return View(productsList);
         }
-
+        //Список продуктов для админа
         public async Task<IActionResult> List(int scategoryId)
         {
             
@@ -58,7 +60,7 @@ namespace IceApp.Web.Controllers
                 {
                     model.Image = binaryReader.ReadBytes((int)formFile.Length);
                 }
-                model.DeliveryPeriod = TimeSpan.FromDays(days).Ticks + TimeSpan.FromHours(hours).Ticks;
+                model.DeliveryPeriod = TimeSpan.FromDays(days).Ticks + TimeSpan.FromHours(hours).Ticks;//Период доставки храним в тиках
                 var product = _mapper.Map<Product>(model);
                 _productserv.Add(product);
                 return RedirectToAction("List", new { scategoryId = model.CategoryId });
@@ -123,6 +125,7 @@ namespace IceApp.Web.Controllers
             else
                 return View(model);
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var product = _mapper.Map<ProductViewModel>(await _productserv.GetById(id));   

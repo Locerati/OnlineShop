@@ -11,6 +11,9 @@ using Microsoft.Extensions.Hosting;
 using IceApp.Infra.IoC;
 using IceApp.Web.AutoMapper;
 using IceApp.Web.Logger;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+
 namespace IceApp.Web
 {
     public class Startup
@@ -28,6 +31,15 @@ namespace IceApp.Web
             AutoMapperIo.RegisterMappings(services);
             DependencyContainer.RegisterServices(services);
             services.AddControllersWithViews();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new PathString("/Account/Login");
+                    options.AccessDeniedPath = new PathString("/Account/Login");
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                });
       
         }
 
@@ -38,6 +50,7 @@ namespace IceApp.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
             }
             else
             {
@@ -50,6 +63,7 @@ namespace IceApp.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

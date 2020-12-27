@@ -86,3 +86,10 @@ div.foo {
         .letter:hover:after {
             transform: scale(1.08,1) rotateX(0deg) rotateY(40deg) rotateZ(0deg) skew(0deg,22deg);
         }
+div.discount {
+    position: absolute;
+    background-image: linear-gradient(to right, #c21500 14%, #ffc500 100%, #c21500 100%);
+    padding: 5px;
+    top: 2%;
+    left: 5%;
+}

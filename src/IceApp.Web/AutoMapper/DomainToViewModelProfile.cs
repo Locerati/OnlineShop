@@ -18,6 +18,8 @@ namespace IceApp.Web.AutoMapper
             CreateMap<ProductCountComments, ProductViewModel>();
             CreateMap<Comment, CommentViewModel>();
             CreateMap<CommentsWithInfo, CommentViewModel>();
+            CreateMap<Order, OrderInfoViewModel>();
+            CreateMap<UserModel,UserViewModel>();
         }
     }
 }

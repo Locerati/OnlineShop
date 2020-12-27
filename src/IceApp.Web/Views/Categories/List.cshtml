@@ -12,7 +12,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Категори</th>
                     <th scope="col">Подкатегории</th>
-
+                    <th scope="col" >Скидка</th>
                     <th class="text-right" scope="col">Редактирование</th>
 
                 </tr>
@@ -23,21 +23,36 @@
                 }
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>@i</td>
-                        <td>@item.Name</td>
-                        <td><a class="btn btn-secondary" asp-controller="Subcategories" asp-action="List" asp-route-categoryId="@item.Id" role="button">Подкатегории</a></td>
-                        <td class="text-right">
-                            <a class="btn btn-warning " role="button" asp-action="Edit" asp-controller="Categories" asp-route-id="@item.Id">Изменить</a> |
-                            <a class="btn btn-danger mt-2 mt-sm-0" role="button" asp-action="Delete" asp-controller="Categories" asp-route-id="@item.Id">Удалить</a>
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Name</td>
+                    <td><a class="btn btn-secondary" asp-controller="Subcategories" asp-action="List" asp-route-categoryId="@item.Id" role="button">Подкатегории</a></td>
+                    <td>
+                        <form style="width:255px;">
+                            <div class="input-group">
+                                <input type="number" class="form-control DiscountVal" value="@item.Discount" placeholder="Скидка" min="1" max="15" name="discount" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <input type="hidden" class="CategId" value="@item.Id" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary DiscountSubmit" type="button">Назначить</button>
+                                    <button class="btn btn-outline-secondary DiscountReset" type="button">Сбросить</button>
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                    <td class="text-right">
+                        <a class="btn btn-warning " role="button" asp-action="Edit" asp-controller="Categories" asp-route-id="@item.Id">Изменить</a> |
+                        <a class="btn btn-danger mt-2 mt-sm-0" role="button" asp-action="Delete" asp-controller="Categories" asp-route-id="@item.Id">Удалить</a>
 
-                        </td>
-                        @{i++;
-                        }
-                    </tr>
+                    </td>
+                    @{i++;
+                    }
+                </tr>
                 }
             </tbody>
         </table>
 
     </div>
 </div>
+@section Scripts{ 
+    <script src="~/js/DiscountSc.js"></script>
+}

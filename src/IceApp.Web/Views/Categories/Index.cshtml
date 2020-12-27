@@ -27,12 +27,15 @@
 
     @foreach (var cat in Model)
     {
-        <div class="col mb-4 mt-4 mt-md-0  ">
+        <div class="col mb-4 mt-4 mt-md-0  ">        
             <a asp-action="Index" asp-controller="Subcategories" asp-route-categoryId="@cat.Id">
                 <figure class="figure">
+                    @if(cat.Discount!=null){
+                      <div class="discount  text-white rounded border border-white">@cat.Discount %</div>
+                    }
                     <div class="img_wrap">
                         <img src="data:image;base64,@Convert.ToBase64String(cat.Image)" class="figure-img img-fluid rounded w-100" alt="Сопроводительная надпись для изображения.">
-                        
+
                     </div>
                     <figcaption class="figure-caption text-center mt-2">@cat.Name</figcaption>
                 </figure>

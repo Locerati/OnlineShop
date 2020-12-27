@@ -39,7 +39,7 @@ namespace IceApp.Infra.Data.Repositories
             {
                 return db.Query<CommentsWithInfo>("SELECT Comments.id as Id,comments.textcomment as textcomment,users.image as Image,users.username as PersonName FROM comments"
                                                     + " LEFT JOIN Products ON Products.Id = comments.ProductId"
-                                                    + $" LEFT JOIN users ON users.Id = comments.userid where productid = {productid} LIMIT 3 OFFSET {startnumber}; ");
+                                                    + $" LEFT JOIN users ON users.Id = comments.userid where productid = {productid} order by comments.id LIMIT 3 OFFSET {startnumber}; ");
             }
         }
     }

@@ -1,0 +1,9 @@
+.login-block {
+  width: 350px;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+ul li {
+    list-style-type: none;
+}

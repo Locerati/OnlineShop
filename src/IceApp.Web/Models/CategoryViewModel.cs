@@ -13,6 +13,7 @@ namespace IceApp.Web.Models
         [Required(ErrorMessage = "Не указано название категории")]
         [StringLength(40, MinimumLength = 2, ErrorMessage = "Длина строки должна быть от 2 до 40 символов")]
         public string Name { get; set; }
+        public string Discount { get; set; }
         public byte[] Image { get; set; }
     }
 }

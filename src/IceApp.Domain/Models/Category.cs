@@ -10,6 +10,7 @@ namespace IceApp.Domain.Models
         public string Name { get; set; }
         public byte[] Image { get; set; }
         public int? ParentId { get; set; }
+        public int? Discount { get; set; }
         public Category Parent { get; set; }
 
         public List<Product> Products { get; set; }

@@ -26,6 +26,15 @@ namespace IceApp.Infra.IoC
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<ICommentRepository, CommentRepository>();
 
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IEncryptionService, EncryptionService>();
+
+            services.AddTransient<IBasketService, BasketService>();
+            services.AddTransient<IBasketRepository, BasketRepository>();
+
+            services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
 
         }
     }
