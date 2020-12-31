@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceApp.Infra.IoC", "src\Ice
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceApp.Web", "src\IceApp.Web\IceApp.Web.csproj", "{B375D82D-CFBA-4C3A-BF40-E7E3793B78DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceApp.Tests", "Tests\IceApp.Tests\IceApp.Tests.csproj", "{11F2DC27-9FF3-4A96-AD47-9BE4A4AE9F6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B375D82D-CFBA-4C3A-BF40-E7E3793B78DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B375D82D-CFBA-4C3A-BF40-E7E3793B78DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B375D82D-CFBA-4C3A-BF40-E7E3793B78DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11F2DC27-9FF3-4A96-AD47-9BE4A4AE9F6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11F2DC27-9FF3-4A96-AD47-9BE4A4AE9F6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11F2DC27-9FF3-4A96-AD47-9BE4A4AE9F6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11F2DC27-9FF3-4A96-AD47-9BE4A4AE9F6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

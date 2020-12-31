@@ -1,0 +1,173 @@
+create table categories
+(
+    id       serial      not null
+        constraint categories_pkey
+            primary key,
+    name     varchar(40) not null,
+    image    bytea,
+    parentid integer
+        constraint categories_parentid_fkey
+            references categories
+            on update cascade on delete cascade,
+    discount integer
+);
+
+alter table categories
+    owner to dpopov;
+
+create table products
+(
+    id             serial       not null
+        constraint products_pkey
+            primary key,
+    name           varchar(250) not null,
+    description    text,
+    weight         integer,
+    image          bytea,
+    deliveryperiod bigint,
+    price          money,
+    categoryid     integer
+        constraint products_categoryid_fkey
+            references categories
+            on update cascade on delete cascade
+);
+
+alter table products
+    owner to dpopov;
+
+create table nlogdblog
+(
+    id          serial      not null
+        constraint nlogdblog_pkey
+            primary key,
+    application varchar(50) not null,
+    logged      timestamp   not null,
+    level       varchar(50) not null,
+    message     text        not null,
+    logger      varchar(250),
+    callsite    text,
+    exception   text
+);
+
+alter table nlogdblog
+    owner to dpopov;
+
+create table roles
+(
+    id   serial      not null
+        constraint roles_pkey
+            primary key,
+    name varchar(50) not null
+);
+
+alter table roles
+    owner to dpopov;
+
+create table users
+(
+    id          serial       not null
+        constraint users_pkey
+            primary key,
+    username    varchar(255) not null,
+    address     varchar(255),
+    phonenumber varchar(255),
+    image       bytea,
+    roleid      integer
+        constraint users_roleid_fkey
+            references roles
+            on update cascade on delete cascade
+);
+
+alter table users
+    owner to dpopov;
+
+create table orders
+(
+    id             serial       not null
+        constraint orders_pkey
+            primary key,
+    address        varchar,
+    paymentmethod  varchar(255) not null,
+    totalprice     integer      not null,
+    orderdate      timestamp    not null,
+    deliverymethod text,
+    userid         integer
+        constraint orders_userid_fkey
+            references users
+);
+
+alter table orders
+    owner to dpopov;
+
+create table baskets
+(
+    id        serial  not null
+        constraint baskets_pkey
+            primary key,
+    productid integer
+        constraint baskets_productid_fkey
+            references products,
+    userid    integer
+        constraint baskets_userid_fkey
+            references users
+            on update cascade on delete cascade,
+    quantity  integer not null
+);
+
+alter table baskets
+    owner to dpopov;
+
+create table comments
+(
+    id          serial not null
+        constraint comments_pkey
+            primary key,
+    productid   integer
+        constraint comments_productid_fkey
+            references products
+            on update cascade on delete cascade,
+    userid      integer
+        constraint comments_userid_fkey
+            references users
+            on delete set null,
+    textcomment text   not null
+);
+
+alter table comments
+    owner to dpopov;
+
+create table orderitems
+(
+    id        serial  not null
+        constraint orderitems_pkey
+            primary key,
+    productid integer not null
+        constraint orderitems_productid_fkey
+            references products
+            on update cascade on delete cascade,
+    orderid   integer not null
+        constraint orderitems_orderid_fkey
+            references orders
+            on update cascade on delete cascade,
+    quantity  integer
+);
+
+alter table orderitems
+    owner to dpopov;
+
+create table usersidentitys
+(
+    id       serial       not null
+        constraint usersidentity_pkey
+            primary key,
+    email    varchar(255) not null,
+    password varchar(255) not null,
+    userid   integer
+        constraint usersidentity_usersid_fkey
+            references users
+            on update cascade on delete cascade
+);
+
+alter table usersidentitys
+    owner to dpopov;
+
